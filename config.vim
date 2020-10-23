@@ -6,12 +6,19 @@
 " and use a font from https://github.com/ryanoasis/nerd-fonts in your terminal 
 " (if you aren't using one of those fonts, you will see funny characters here. 
 " Turst me, they look nice when using one of those fonts).
-let fancy_symbols_enabled = 0
+let fancy_symbols_enabled = 1
 
 
 set encoding=utf-8
 let using_neovim = has('nvim')
 let using_vim = !using_neovim
+
+" Figure out the system Python for Neovim.
+if exists("$VIRTUAL_ENV")
+    let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
+else
+    let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
+endif
 
 " ============================================================================
 " Vim-plug initialization
@@ -245,6 +252,19 @@ map <M-Right> :tabn<CR>
 imap <M-Right> <ESC>:tabn<CR>
 map <M-Left> :tabp<CR>
 imap <M-Left> <ESC>:tabp<CR>
+
+" Add Control-Shift-Left/Right to navigate between tabs
+map <C-S-Right> :tabn<CR>
+imap <C-S-Right> <ESC>:tabn<CR>
+map <C-S-Left> :tabp<CR>
+imap <C-S-Left> <ESC>:tabp<CR>
+
+" Add Control-Shift-h/l to navigate between tabs
+map <C-S-l> :tabn<CR>
+imap <C-S-l> <ESC>:tabn<CR>
+map <C-S-h> :tabp<CR>
+imap <C-S-h> <ESC>:tabp<CR>
+
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
