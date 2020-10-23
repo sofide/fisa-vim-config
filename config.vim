@@ -275,6 +275,9 @@ nnoremap <silent> // :noh<CR>
 " clear empty spaces at the end of lines on save of python files
 autocmd BufWritePre *.py :%s/\s\+$//e
 
+" clear empty spaces at the end of lines on save of javascript files
+autocmd BufWritePre *.js,*.jsx :%s/\s\+$//e
+
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
 set shell=/bin/bash 
@@ -344,6 +347,18 @@ let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
 
 " Disable error messages inside the buffer, next to the problematic line
 let g:neomake_virtualtext_current_error = 0
+
+
+" Config for javascript
+" Linter
+let eslint = neomake#makers#ft#javascript#eslint()
+call remove(eslint, 'cwd')
+let eslint.exe = 'eslint'
+let g:neomake_javascript_eslintcustom_maker = eslint
+
+
+" convert Tab in two spaces
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 
 " Fzf ------------------------------
 
