@@ -339,6 +339,7 @@ map <F2> :TaskList<CR>
 " Run linter on write
 autocmd! BufWritePost * Neomake
 
+"let g:neomake_python_enabled_makers = add(neomake#makers#ft#python#EnabledMakers(), 'mypy')
 " Check code as python3 by default
 let g:neomake_python_python_maker = neomake#makers#ft#python#python()
 let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
@@ -359,6 +360,8 @@ let g:neomake_javascript_eslintcustom_maker = eslint
 
 " convert Tab in two spaces
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+autocmd FileType scss setlocal ts=2 sts=2 sw=2
 
 " Fzf ------------------------------
 
