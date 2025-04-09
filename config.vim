@@ -115,8 +115,9 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'sheerun/vim-polyglot'
 " Ack code search (requires ack installed in the system)
 Plug 'mileszs/ack.vim'
-" Paint css colors with the real color
-Plug 'lilydjwg/colorizer'
+" Paint css colors with the real color - commented bc it makes big files
+" suuper slow
+" Plug 'lilydjwg/colorizer'
 " Window chooser
 Plug 't9md/vim-choosewin'
 " Automatically sort python imports
@@ -141,6 +142,16 @@ Plug 'neomake/neomake'
 Plug 'myusuf3/numbers.vim'
 " Nice icons in the file explorer and file type status line.
 Plug 'ryanoasis/vim-devicons'
+" Fury plugin by Nico Kreiff
+Plug 'nvim-lua/plenary.nvim'
+Plug '~/devel/fury_nvim_nico_keriff/fury.nvim'
+
+" Copilot chat
+Plug 'github/copilot.vim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
+
+set completeopt+=noinsert,popup
+
 
 if using_vim
     " Consoles as buffers (neovim has its own consoles as buffers)
@@ -497,3 +508,11 @@ endif
 if filereadable(expand(custom_configs_path))
   execute "source " . custom_configs_path
 endif
+
+lua << EOF
+require("CopilotChat").setup({
+    window = {
+        layout = "vertical", -- Other options: "horizontal", "float"
+    }
+})
+EOF
